@@ -1,0 +1,77 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+	<table class="table table-striped" id="apikeys_table">
+		<thead>
+			<tr>
+				<th>Id:</th>
+				<th>API-nøkkel:</th>
+				<th>API-secret:</th>
+				<th>Retur-URL:</th>
+				<th>Token-URL:</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for key in APIKeyCollection.getAllKeys() %}
+				<tr>
+					<th scope="row">{{ key.id }}</th>
+					<td>{{ key.api_key }}</td>
+					<td>{{ key.api_secret }}</td>
+					<td>{{ key.api_returnURL }}</td>
+					<td>{{ key.api_tokenURL }}</td>
+					<td>
+						<form method="POST" action="{{ delete_apikey_action }}">
+							<button name="delete_id" value="{{ key.id }}" class="btn btn-danger" type="submit">Slett</button>
+						</form>
+					</td>
+				</tr>
+			{% else %}
+					</tbody>
+				</table>
+				<b>
+					Det finnes ingen api-nøkler i databasen. Det vil si at ingen tjenester som bruker UKMDipBundle v1.0.0 eller nyere har tilgang til innlogging.
+				</b>
+			{% endfor %}
+
+			<tr>
+				<form class="form" action="{{ new_apikey_action }}" method="POST">
+					<td>
+						{# <input class="form-control" type="numeric" disabled> #}
+						<button class="btn btn-success" type="submit">Lagre</button>
+					</td>
+					<td>
+						<input id="api_key" name="api_key" class="form-control" type="text" required="required">
+					</td>
+					<td>
+						<input id="api_secret" name="api_secret" class="form-control" type="text" placeholder="">
+					</td>
+					<td>
+						<input id="api_returnURL" name="api_returnURL" class="form-control" type="text" required="required">
+					</td>
+					<td>
+						<input id="api_tokenURL" name="api_tokenURL" class="form-control" type="text" required="required">
+					</td>
+				</form>
+			</tr>
+			<tr>
+				<td>
+					ID autogenereres av databasen.
+				</td>
+				<td>
+					API-nøkkel-feltet er en unik, tekstbasert identifikator for tjenesten du legger til. 
+				</td>
+				<td>
+					API-secret-feltet autogenereres av serveren hvis feltet er tomt - fyll kun ut dette dersom du driver med testing og vil ha en secret som er lett å huske.
+				</td>
+				<td>
+					Retur-URL er URLen som brukeren blir sendt tilbake til etter fullført innlogging. Standard for UKMDipBundle v1.0.0 er http://{ tjeneste }.ukm.no/login/.
+				</td>
+				<td>
+					Token-URL er URLen som Delta sender brukerdata til etter endt innlogging.
+				</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
