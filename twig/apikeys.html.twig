@@ -22,7 +22,7 @@
 					<td>{{ key.api_tokenURL }}</td>
 					<td>
 						<form method="POST" action="{{ delete_apikey_action }}">
-							<button name="delete_id" value="{{ key.id }}" class="btn btn-danger" type="submit">Slett</button>
+							<button name="delete_id" value="{{ key.id }}" class="btn btn-danger confirm" onclick="return confirm('Er du sikker på at du vil slette denne?');" type="submit">Slett</button>
 						</form>
 					</td>
 				</tr>
