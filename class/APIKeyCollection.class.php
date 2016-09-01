@@ -22,6 +22,7 @@ class APIKeyCollection {
 		$sql = new SQL('SELECT * FROM APIKeys', array(), 'ukmdelta');
 		$res = $sql->run();
 		$data = array();
+		if(!$res) return false;
 		while($row = mysql_fetch_assoc($res)) {
 			$d = array( 
 							'id' => $row['id'],
@@ -32,7 +33,7 @@ class APIKeyCollection {
 							);
 			$data[] = $this->getKeyFromData($d);
 		}
-		
+
 		return $data;
 	}
 }
