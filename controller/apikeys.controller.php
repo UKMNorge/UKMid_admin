@@ -24,7 +24,7 @@ if( isset($_POST['api_key']) ) {
 
 	#echo $sql->debug();
 	$res = $sql->run();
-	var_dump($res);
+	#var_dump($res);
 	if($res == 1)
 		$TWIG['message'] = array( 	'success' 	=> 'success',
 									'title' 	=> 'Nøkkelen ble lagret!',
