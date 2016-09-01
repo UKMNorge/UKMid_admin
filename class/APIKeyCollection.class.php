@@ -1,5 +1,7 @@
 <?php
 
+require_once('UKM/sql.class.php');
+
 class APIKeyCollection {
 	
 	public function getKeyFromData($data) {
@@ -17,18 +19,20 @@ class APIKeyCollection {
 	 * Returns an array of APIKey-objects.
 	 */ 
 	public function getAllKeys() {
-		$dummyData = array(	'id' => 1,
-							'api_key' => 'dummy_key',
-							'api_secret' => 'dummy_secret',
-							'api_returnurl' => 'http://test.ukm.dev/login_dummy',
-							'api_tokenurl' => 'http://test.ukm.dev/receive_dummy' );
-		
-		$keys = array();
-		for($i = 0; $i < 3; $i++) {
-			$dummyData['id'] = $i;
-			$keys[] = $this->getKeyFromData($dummyData);
+		$sql = new SQL('SELECT * FROM APIKeys', array(), 'ukmdelta');
+		$res = $sql->run();
+		$data = array();
+		while($row = mysql_fetch_assoc($res)) {
+			$d = array( 
+							'id' => $row['id'],
+							'api_key' => $row['api_key'],
+							'api_secret' => $row['api_secret'],
+							'api_returnurl' => $row['api_returnurl'],
+							'api_tokenurl' => $row['api_tokenurl']
+							);
+			$data[] = $this->getKeyFromData($d);
 		}
-
-		return $keys;
+		
+		return $data;
 	}
 }
