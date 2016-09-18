@@ -14,7 +14,7 @@ if(is_admin()) {
 
 
 function UKMid_admin_menu() {
-	$page = add_menu_page('UKMid-admin', 'UKMid-admin', 'superadmin', 'ukmid_admin', 'ukmid_admin', 'none', 28);
+	$page = add_menu_page('UKMid-admin', 'UKMid-admin', 'superadmin', 'ukmid_admin', 'ukmid_admin', 'http://ico.ukm.no/logginn-16.png', 28);
 
 	define('UKMID_PLUGIN_DIR_PATH', __DIR__.'/');
 
