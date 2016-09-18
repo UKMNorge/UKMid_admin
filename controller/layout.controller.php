@@ -7,8 +7,18 @@ $tabs[] = (object) array( 'link' 		=> 'oversikt',
 						  'description'	=> 'Systemoversikt');
 
 $tabs[] = (object) array( 'link' 		=> 'apikeys',
-						  'header' 		=> 'API-nøkler',
-						  'icon'		=> 'lock-256',
+						  'header' 		=> 'UKMid-nøkler',
+						  'icon'		=> 'logginn-256',
 						  'description' => 'Administrer systemtilgang');
+
+$tabs[] = (object) array( 'link' 		=> 'ukmapikeys',
+						  'header'		=> 'UKMapi-nøkler',
+						  'icon'		=> 'lock-256',
+						  'description' => 'Administrer API-tilgang');
+
+$tabs[] = (object) array( 'link' 		=> 'permissions',
+						  'header'		=> 'Tillatelser',
+						  'icon'		=> 'tools-256',
+						  'description' => 'Administrer API-tillatelser');
 
 $TWIG['tabs'] = $tabs;

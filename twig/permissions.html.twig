@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+	<table class="table table-striped" id="apikeys_table">
+		<thead>
+			<tr>
+				<th>Id:</th>
+				<th>System</th>
+				<th>Tilgang:</th>
+				<th>API-nøkkel:</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for permission in PermissionCollection.getAllPermissions() %}
+				<tr>
+					<th scope="row">{{ permission.id }}</th>
+					<td>{{ permission.system }}</td>
+					<td>{{ permission.permission }}</td>
+					<td>{{ permission.api_key }}</td>
+					<td>
+						<form method="POST" action="{{ delete_permission_action }}">
+							<button name="delete_id" value="{{ permission.id }}" class="btn btn-danger confirm" onclick="return confirm('Er du sikker på at du vil slette denne?');" type="submit">Slett</button>
+						</form>
+					</td>
+				</tr>
+			{% else %}
+					</tbody>
+				</table>
+				<b>
+					Det finnes ingen api-nøkler i databasen. Det vil si at ingen tjenester som bruker UKMAccessBundle har tilgang til å hente ut data.
+				</b>
+				<table class="table table-striped" id="permissions_table">
+					<tbody>
+			{% endfor %}
+
+			<tr>
+				<form class="form" action="{{ new_permission_action }}" method="POST">
+					<td>
+						{# <input class="form-control" type="numeric" disabled> #}
+						<button class="btn btn-success" type="submit">Lagre</button>
+					</td>
+					<td>
+						<input id="system" name="system" class="form-control" type="text" required="required">
+					</td>
+					<td>
+						<input id="permission" name="permission" class="form-control" type="text" required="required">
+					</td>
+					<td>
+						<input id="api_key" name="api_key" class="form-control" type="text" placeholder="">
+					</td>
+				</form>
+			</tr>
+			<tr>
+				<td>
+					ID autogenereres av databasen.
+				</td>
+				<td>
+					System er en identifikator for systemet som tilbyr data.
+				</td>
+				<td>
+					Permission er en tekstbasert nøkkel for tilgangen som tilbys. TODO: Lag et explainPermissions-endpoint for å finne mulige tilganger.
+				</td>
+				<td>
+					API-nøkkel-feltet er en unik, tekstbasert identifikator for tjenesten du legger til. Refererer til felt i <a href="?page=ukmid_admin&action=ukmapikeys">UKMapi-nøkler</a>.
+				</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
