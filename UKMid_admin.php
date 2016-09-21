@@ -15,19 +15,12 @@ if(is_admin()) {
 
 function UKMid_admin_menu() {
 	$page = add_menu_page('UKMapi-admin', 'UKMapi-admin', 'superadmin', 'ukmid_admin', 'ukmid_admin', 'http://ico.ukm.no/logginn-16.png', 28);
-
 	define('UKMID_PLUGIN_DIR_PATH', __DIR__.'/');
 
 	// Queue up script-includes
 	ukmid_admin_scripts();
 	// Queue up style-includes
 	ukmid_admin_styles();
-
-	
-	
-	#$page = add_menu_page('UKM Norge Systemverktøy', 'System', 'superadmin', 'UKMsystemtools','UKMsystemtools', 'http://ico.ukm.no/system-16.png',22);
-
-	#$subpage1 = add_submenu_page( 'UKMsystemtools', 'Kontakteksport', 'Kontakteksport', 'superadministrator', 'UKMkontakteksport', 'UKMkontakteksport' );
 }
 
 
