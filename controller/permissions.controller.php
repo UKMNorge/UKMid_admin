@@ -6,6 +6,16 @@ $TWIG['PermissionCollection'] = new PermissionCollection();
 $TWIG['new_permission_action'] = '?page=ukmid_admin&action=permissions';
 $TWIG['delete_permission_action'] = '?page=ukmid_admin&action=permissions';
 
+// Finn hvilke systemer vi har, sånn at vi kan legge de til i listen.
+$sql = new SQL("SELECT `api_key` FROM API_Keys");
+$res = $sql->run();
+$api_keys = array();
+while($row = mysql_fetch_assoc($res)) {
+	$api_keys[] = $row['api_key'];	
+}
+$TWIG['api_keys'] = $api_keys;
+
+
 if( isset($_POST['permission']) ) {
 	// Legg til ny nøkkel i databasen
 	$sql = new SQLins('API_Permissions', array());

@@ -41,13 +41,27 @@
 						<button class="btn btn-success" type="submit">Lagre</button>
 					</td>
 					<td>
-						<input id="system" name="system" class="form-control" type="text" required="required">
+						{# <input id="system" name="system" class="form-control" type="text" required="required"> #}
+						<select id="system" name="system" class="form-control">
+							{% for key in api_keys %}
+								<option value="{{ key }}">{{ key }}</option>
+							{% else %}
+								<option value="" disabled>Ingen API-nøkler finnes i databasen</option>
+							{% endfor %}
+						</select>
 					</td>
 					<td>
 						<input id="permission" name="permission" class="form-control" type="text" required="required">
 					</td>
 					<td>
-						<input id="api_key" name="api_key" class="form-control" type="text" placeholder="">
+						<select id="api_key" name="api_key" class="form-control">
+							{% for key in api_keys %}
+								<option value="{{ key }}">{{ key }}</option>
+							{% else %}
+								<option value="" disabled>Ingen API-nøkler i databasen</option>
+							{% endfor %}
+						</select>
+						{# <input id="api_key" name="api_key" class="form-control" type="text" placeholder=""> #}
 					</td>
 				</form>
 			</tr>
