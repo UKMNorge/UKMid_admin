@@ -11,4 +11,5 @@ if(!defined('UKM_DELTA_DB_NAME')) {
 }
 ```
 ### 2. Opprett database-tabeller
+SSH UKMdelta:
 bin/console doctrine:schema:update --force
