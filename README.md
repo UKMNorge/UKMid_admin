@@ -11,18 +11,4 @@ if(!defined('UKM_DELTA_DB_NAME')) {
 }
 ```
 ### 2. Opprett database-tabeller
-```
-CREATE TABLE `API_Keys` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `api_key` varchar(50) NOT NULL DEFAULT '',
-  `secret` varchar(60) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-CREATE TABLE `API_Permissions` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `system` varchar(50) NOT NULL DEFAULT '',
-  `permission` varchar(50) NOT NULL DEFAULT '',
-  `api_key` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-```
+bin/console doctrine:schema:update --force
