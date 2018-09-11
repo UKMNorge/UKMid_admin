@@ -10,7 +10,7 @@ $TWIG['delete_permission_action'] = '?page=ukmid_admin&action=permissions';
 $sql = new SQL("SELECT `api_key` FROM API_Keys");
 $res = $sql->run();
 $api_keys = array();
-while($row = mysql_fetch_assoc($res)) {
+while($row = SQL::fetch($res)) {
 	$api_keys[] = $row['api_key'];	
 }
 $TWIG['api_keys'] = $api_keys;
