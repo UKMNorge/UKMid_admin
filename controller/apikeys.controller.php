@@ -25,7 +25,7 @@ if( isset($_POST['api_key']) ) {
 	#echo $sql->debug();
 	$res = $sql->run();
 	#var_dump($res);
-	if($res == 1)
+	if($res)
 		$TWIG['message'] = array( 	'success' 	=> 'success',
 									'title' 	=> 'Nøkkelen ble lagret!',
 									'body' 		=> '');
@@ -42,7 +42,7 @@ if( isset($_POST['api_key']) ) {
 
 	#echo $sql->debug();
 	$res = $sql->run();
-	if($res != 1) {
+	if(!$res) {
 		$TWIG['message'] = array( 	'success' 	=> false,
 									'title' 	=> 'Klarte ikke å slette nøkkel med id '.$_POST['delete_id'].'!',
 									'body' 		=> '');
