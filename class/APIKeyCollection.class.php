@@ -23,7 +23,7 @@ class APIKeyCollection {
 		$res = $sql->run();
 		$data = array();
 		if(!$res) return false;
-		while($row = mysql_fetch_assoc($res)) {
+		while($row = SQL::fetch($res)) {
 			$d = array( 
 							'id' => $row['id'],
 							'api_key' => $row['api_key'],
@@ -56,7 +56,7 @@ class UKMAPIKeyCollection {
 		$res = $sql->run();
 		$data = array();
 		if(!$res) return false;
-		while($row = mysql_fetch_assoc($res)) {
+		while($row = SQL::fetch($res)) {
 			$d = array( 
 							'id' => $row['id'],
 							'api_key' => $row['api_key'],

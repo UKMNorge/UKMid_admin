@@ -16,7 +16,7 @@ class PermissionCollection {
 		$res = $sql->run();
 		$data = array();
 		if(!$res) return false;
-		while($row = mysql_fetch_assoc($res)) {
+		while($row = SQL::fetch($res)) {
 			$d = array( 
 							'id' => $row['id'],
 							'system' => $row['system'],

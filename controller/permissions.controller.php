@@ -10,7 +10,7 @@ $TWIG['delete_permission_action'] = '?page=ukmid_admin&action=permissions';
 $sql = new SQL("SELECT `api_key` FROM API_Keys");
 $res = $sql->run();
 $api_keys = array();
-while($row = mysql_fetch_assoc($res)) {
+while($row = SQL::fetch($res)) {
 	$api_keys[] = $row['api_key'];	
 }
 $TWIG['api_keys'] = $api_keys;
@@ -26,7 +26,7 @@ if( isset($_POST['permission']) ) {
 	#echo $sql->debug();
 	$res = $sql->run();
 	#var_dump($res);
-	if($res == 1)
+	if($res)
 		$TWIG['message'] = array( 	'success' 	=> 'success',
 									'title' 	=> 'Tilgangen ble lagret!',
 									'body' 		=> '');
@@ -43,7 +43,7 @@ if( isset($_POST['permission']) ) {
 
 	#echo $sql->debug();
 	$res = $sql->run();
-	if($res != 1) {
+	if(!$res) {
 		$TWIG['message'] = array( 	'success' 	=> false,
 									'title' 	=> 'Klarte ikke å slette tilgang med id '.$_POST['delete_id'].'!',
 									'body' 		=> '');
