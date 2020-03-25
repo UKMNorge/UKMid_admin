@@ -1,5 +1,8 @@
 <?php
 
+use UKMNorge\Database\SQL\Delete;
+use UKMNorge\Database\SQL\Insert;
+
 require_once( UKMID_PLUGIN_DIR_PATH . 'class/APIKeyCollection.class.php');
 
 $TWIG['APIKeyCollection'] = new APIKeyCollection();
@@ -9,7 +12,7 @@ $TWIG['delete_apikey_action'] = '?page=ukmid_admin&action=apikeys';
 
 if( isset($_POST['api_key']) ) {
 	// Legg til ny nøkkel i databasen
-	$sql = new SQLins('APIKeys', array(), 'ukmdelta');
+	$sql = new Insert('APIKeys', array(), 'ukmdelta');
 	$sql->add('api_key', $_POST['api_key']);
 	if(!empty($_POST['api_secret'])) {
 		$sql->add('api_secret', $_POST['api_secret']);
@@ -38,7 +41,7 @@ if( isset($_POST['api_key']) ) {
 	if($_POST['delete_id'] == null || $_POST['delete_id'] == '' || !is_numeric($_POST['delete_id']) ) {
 		die('Kan ikke slette uten ID!');
 	}
-	$sql = new SQLdel('APIKeys', array('id' => $_POST['delete_id']), 'ukmdelta');
+	$sql = new Delete('APIKeys', array('id' => $_POST['delete_id']), 'ukmdelta');
 
 	#echo $sql->debug();
 	$res = $sql->run();

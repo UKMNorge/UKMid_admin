@@ -1,5 +1,9 @@
 <?php
 
+use UKMNorge\Database\SQL\Delete;
+use UKMNorge\Database\SQL\Insert;
+use UKMNorge\Database\SQL\Query;
+
 require_once( UKMID_PLUGIN_DIR_PATH . 'class/PermissionCollection.class.php');
 $TWIG['PermissionCollection'] = new PermissionCollection();
 
@@ -7,10 +11,10 @@ $TWIG['new_permission_action'] = '?page=ukmid_admin&action=permissions';
 $TWIG['delete_permission_action'] = '?page=ukmid_admin&action=permissions';
 
 // Finn hvilke systemer vi har, sånn at vi kan legge de til i listen.
-$sql = new SQL("SELECT `api_key` FROM API_Keys");
+$sql = new Query("SELECT `api_key` FROM API_Keys");
 $res = $sql->run();
 $api_keys = array();
-while($row = SQL::fetch($res)) {
+while($row = Query::fetch($res)) {
 	$api_keys[] = $row['api_key'];	
 }
 $TWIG['api_keys'] = $api_keys;
@@ -18,7 +22,7 @@ $TWIG['api_keys'] = $api_keys;
 
 if( isset($_POST['permission']) ) {
 	// Legg til ny nøkkel i databasen
-	$sql = new SQLins('API_Permissions', array());
+	$sql = new Insert('API_Permissions');
 	$sql->add('system', $_POST['system']);
 	$sql->add('permission', $_POST['permission']);
 	$sql->add('api_key', $_POST['api_key']);
@@ -39,7 +43,7 @@ if( isset($_POST['permission']) ) {
 	if($_POST['delete_id'] == null || $_POST['delete_id'] == '' || !is_numeric($_POST['delete_id']) ) {
 		die('Kan ikke slette uten ID!');
 	}
-	$sql = new SQLdel('API_Permissions', array('id' => $_POST['delete_id']));
+	$sql = new Delete('API_Permissions', array('id' => $_POST['delete_id']));
 
 	#echo $sql->debug();
 	$res = $sql->run();

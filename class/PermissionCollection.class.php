@@ -1,5 +1,7 @@
 <?php
 
+use UKMNorge\Database\SQL\Query;
+
 class PermissionCollection {
 
 	public function getPermissionFromData($data) {
@@ -12,11 +14,11 @@ class PermissionCollection {
 	}
 
 	public function getAllPermissions() {
-		$sql = new SQL('SELECT * FROM API_Permissions', array());
+		$sql = new Query('SELECT * FROM API_Permissions', array());
 		$res = $sql->run();
 		$data = array();
 		if(!$res) return false;
-		while($row = SQL::fetch($res)) {
+		while($row = Query::fetch($res)) {
 			$d = array( 
 							'id' => $row['id'],
 							'system' => $row['system'],

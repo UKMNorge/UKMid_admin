@@ -1,6 +1,8 @@
 <?php
 
-require_once('UKM/sql.class.php');
+use UKMNorge\Database\SQL\Query;
+
+require_once('UKM/Autoloader.php');
 
 class APIKeyCollection {
 	
@@ -19,11 +21,11 @@ class APIKeyCollection {
 	 * Returns an array of APIKey-objects.
 	 */ 
 	public function getAllKeys() {
-		$sql = new SQL('SELECT * FROM APIKeys', array(), 'ukmdelta');
+		$sql = new Query('SELECT * FROM APIKeys', [], 'ukmdelta');
 		$res = $sql->run();
 		$data = array();
 		if(!$res) return false;
-		while($row = SQL::fetch($res)) {
+		while($row = Query::fetch($res)) {
 			$d = array( 
 							'id' => $row['id'],
 							'api_key' => $row['api_key'],
@@ -52,11 +54,11 @@ class UKMAPIKeyCollection {
 	 * Returns an array of APIKey-objects.
 	 */ 
 	public function getAllKeys() {
-		$sql = new SQL('SELECT * FROM API_Keys', array());
+		$sql = new Query('SELECT * FROM API_Keys',[]);
 		$res = $sql->run();
 		$data = array();
 		if(!$res) return false;
-		while($row = SQL::fetch($res)) {
+		while($row = Query::fetch($res)) {
 			$d = array( 
 							'id' => $row['id'],
 							'api_key' => $row['api_key'],
